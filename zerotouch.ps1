@@ -14,14 +14,11 @@ Pop-Location
 $ImagePath = $FileBrowser.FileName
 Write-Host "$ImagePath"
 
-
 $mount = Mount-DiskImage -ImagePath $ImagePath -PassThru
 $driveLetter = ($mount | Get-Volume).DriveLetter
 
-
 Write-Output "Mounted image at drive letter: $driveLetter"
 
-#...
 $folderBrowser = New-Object System.Windows.Forms.FolderBrowserDialog
 $folderBrowser.Description = "Select Destination Folder..."
 
@@ -37,3 +34,4 @@ $SourcePath = "$driveLetter" + ":\*"
 Copy-Item -Path $SourcePath -Destination $DestinationPath -Recurse
 
 Dismount-DiskImage -ImagePath $ImagePath
+
