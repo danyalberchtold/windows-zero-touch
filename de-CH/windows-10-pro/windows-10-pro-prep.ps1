@@ -1,3 +1,5 @@
+$FolderPath = "D:\ZT\windows-10-src"
+
 # Delete the bootfix.bin
 Remove-Item (Join-Path $FolderPath "boot\bootfix.bin") -Force
 
