@@ -1,3 +1,20 @@
+clear
+# ASCII-Art
+$asciiArt = @"
+     _____                 _____                 _     
+    / _  / ___ _ __ ___   /__   \___  _   _  ___| |__  
+    \// / / _ \ '__/ _ \    / /\/ _ \| | | |/ __| '_ \ 
+     / //\  __/ | | (_) |  / / | (_) | |_| | (__| | | |
+    /____/\___|_|  \___/   \/   \___/ \__,_|\___|_| |_|
+
+"@
+
+# ASCII-Art ausgeben
+Write-Output $asciiArt
+Write-Output "    Language:     [de-CH]"
+Write-Output "    Edition:      [Pro N]"
+#$lang = Read-Host -Prompt "    Edition: [Pro N]"
+
 Add-Type -AssemblyName System.Windows.Forms
 
 Push-Location
@@ -12,19 +29,19 @@ if($FileBrowser.ShowDialog() -ne "OK") {
 
 Pop-Location
 $ImagePath = $FileBrowser.FileName
-Write-Host "$ImagePath"
+Write-Host "    ISO:          [$ImagePath]"
 
 $mount = Mount-DiskImage -ImagePath $ImagePath -PassThru
 $driveLetter = ($mount | Get-Volume).DriveLetter
 
-Write-Output "Mounted image at drive letter: $driveLetter"
+Write-Output "    Mounted:      [$driveLetter]"
 
 $folderBrowser = New-Object System.Windows.Forms.FolderBrowserDialog
 $folderBrowser.Description = "Select Destination Folder..."
 
 if ($folderBrowser.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) {
     $DestinationPath = $folderBrowser.SelectedPath
-    Write-Host "$DestinationPath"
+    Write-Host "    Destination: [$DestinationPath]"
 } else {
     Write-Output "No folder selected. Exiting script."
     exit
